@@ -23,7 +23,7 @@ export default function App() {
       opacity: 1,
     },
     config: { duration: 500, friction: 120 },
-    reset: true
+    reset: true,
   });
   useEffect(() => {
     fetch(`https://valorant-api.com/v1/agents`)
@@ -56,13 +56,29 @@ export default function App() {
       console.log("after change", currentSlide);
     },
   };
+  const mobileSettings = {
+    focusOnSelect: true,
+    arrows: false,
+    dots: false,
+    infinite: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    vertical: false,
+    verticalSwiping: false,
+    beforeChange: function (currentSlide, nextSlide) {
+      console.log("before change", currentSlide, nextSlide);
+    },
+    afterChange: function (currentSlide) {
+      console.log("after change", currentSlide);
+    },
+  };
   const agentHandler = (agent) => {
     setCurrentAgent(agent);
     console.log("current agent is " + currentAgent.displayName);
   };
 
   return (
-    <div className="h-screen w-screen bg-off-white">
+    <div className="h-screen w-screen bg-off-white none lg:block">
       <div className="w-full h-1/2 overflow-hidden relative bg-teal-500">
         <video
           autoPlay
@@ -75,7 +91,7 @@ export default function App() {
       </div>
       <div className="flex justify-center align-middle">
         {!loading && (
-          <div className="absolute h-full z-10 top-0  w-3/4">
+          <div className="lg:absolute lg:flex h-full z-10 top-0 hidden w-3/4">
             <Slider {...settings} className="">
               {agents.map((agent) =>
                 agent.uuid === currentAgent.uuid ? (
@@ -90,6 +106,38 @@ export default function App() {
                   <h2
                     key={agent.uuid}
                     className="cursor-grab font-extrabold text-8xl text-off-white pointer-events-auto transform transition-all hover:pl-11"
+                    onClick={() => agentHandler(agent)}
+                  >
+                    {agent.displayName.toUpperCase()}
+                  </h2>
+                )
+              )}
+            </Slider>
+            <animated.div style={styles}>
+              {!loading && <AgentHero agent={currentAgent}></AgentHero>}
+            </animated.div>
+          </div>
+        )}
+      </div>
+
+      {/* MOBILE SETTINGS */}
+      <div className="flex justify-center align-middle">
+        {!loading && (
+          <div className="absolute lg:hidden h-full z-10 top-0 w-full pt-5">
+            <Slider {...mobileSettings} className="">
+              {agents.map((agent) =>
+                agent.uuid === currentAgent.uuid ? (
+                  <h2
+                    key={agent.uuid}
+                    className="cursor-grab font-extrabold text-4xl text-[#FE4555] pointer-events-auto transform transition-all hover:pl-11"
+                    onClick={() => agentHandler(agent)}
+                  >
+                    {agent.displayName.toUpperCase()}
+                  </h2>
+                ) : (
+                  <h2
+                    key={agent.uuid}
+                    className="cursor-grab font-extrabold text-4xl text-off-white pointer-events-auto transform transition-all hover:pl-11"
                     onClick={() => agentHandler(agent)}
                   >
                     {agent.displayName.toUpperCase()}

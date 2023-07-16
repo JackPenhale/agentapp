@@ -26,17 +26,17 @@ export default function AgentHero(props) {
   });
 
   return (
-    <div className="absolute h-fit -top-20 m-auto right-0 left-0  z-50 text-off-white pointer-events-none">
+    <div className="flex  w-10/12 flex-col md:absolute md:h-fit md:-top-20 md:m-auto md:right-0 md:left-0  md:z-50 md:text-off-white pointer-events-none text-slate-800">
       <animated.div
         style={imageSpring}
         className=" flex justify-center align-middle"
       >
         <img
-          className="w-[1024px] h-auto pointer-events-none "
+          className="md:w-[1024px] h-full pointer-events-none "
           src={props.agent.fullPortrait}
         ></img>
       </animated.div>
-      <div className="absolute w-3/12 top-60 left-3/4">
+      <div className="md:absolute md:w-3/12 md:top-60 md:left-3/4 pt-20 md:pt-0">
         <h4 className="text-lg font-semibold pb-5">// ROLE</h4>
         <div className="flex">
           <animated.h3

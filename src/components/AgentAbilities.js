@@ -10,7 +10,7 @@ export default function AgentAbilities(props) {
   };
   const styles = useSpring({
     from: {
-      opacity: .2,
+      opacity: 0.2,
     },
     to: {
       opacity: 1,
@@ -22,7 +22,7 @@ export default function AgentAbilities(props) {
     setCurrentAbility(props.agent.abilities[0]);
   }, [props.agent]);
   return (
-    <div className=" absolute z-50 top-2/3">
+    <div className="flex pt-80 md:pt-20 md:absolute  md:z-50  md:top-2/3 bg-off-white">
       <div className="flex align-middle justify-center w-screen">
         <div className="flex-col text-black w-3/4  justify-center align-middle">
           <h2 className="text-4xl font-extrabold text-center">
@@ -35,7 +35,7 @@ export default function AgentAbilities(props) {
                 className="cursor-pointer 
                 pointer-events-auto
                  text-black 
-                 h-20 w-20 p-4 m-4 
+                 h-20 w-20  md:p-4  md:m-4 
                  border-2 
                  bg-[#0F1823]
                  transform
@@ -50,12 +50,18 @@ export default function AgentAbilities(props) {
               </div>
             ))}
           </div>
-          <animated.div style={styles} className="flex-col justify-center align-middle items-center text-center content-center ">
+          <animated.div
+            style={styles}
+            className="flex-col justify-center align-middle items-center text-center content-center "
+          >
             <h4 className="font-bold text-center text-2xl">
               {currentAbility.displayName}
             </h4>
-            <div style={styles} className="flex w-full justify-center align-middle">
-              <p className="text-left w-1/3">{currentAbility.description}</p>
+            <div
+              style={styles}
+              className="flex w-full justify-center align-middle pb-36"
+            >
+              <p className="text-left md:w-1/3">{currentAbility.description}</p>
             </div>
           </animated.div>
         </div>
